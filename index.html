@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sherri Cruz — Journalist & Author</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,700;0,900;1,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --atomic-orange: #FF5C1A;
+      --starburst-yellow: #FFD21E;
+      --teal-blast: #00C5B5;
+      --hot-coral: #FF3E6C;
+      --space-navy: #0A0E2A;
+      --cream: #FFF8E7;
+      --pale-teal: #D0F5F2;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--space-navy);
+      color: var(--cream);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* ===== STARBURST SVG BACKGROUND ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 10% 20%, rgba(255,92,26,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 80%, rgba(0,197,181,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, rgba(255,210,30,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(10,14,42,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--atomic-orange);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: var(--starburst-yellow);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--starburst-yellow); }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2.5rem 5rem;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Atomic starburst decoration */
+    .starburst {
+      position: absolute;
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 520px;
+      height: 520px;
+      opacity: 0.18;
+      animation: slowspin 60s linear infinite;
+    }
+
+    .starburst-sm {
+      position: absolute;
+      left: 5%;
+      bottom: 8%;
+      width: 180px;
+      height: 180px;
+      opacity: 0.12;
+      animation: slowspin 40s linear infinite reverse;
+    }
+
+    @keyframes slowspin { to { transform: translateY(-50%) rotate(360deg); } }
+    @keyframes slowspin2 { to { transform: rotate(360deg); } }
+    .starburst-sm { animation: slowspin2 40s linear infinite reverse; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--teal-blast);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 2px;
+      background: var(--teal-blast);
+    }
+
+    .hero-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 0.95;
+      color: var(--cream);
+      text-shadow: 4px 4px 0 var(--atomic-orange);
+    }
+
+    .hero-name span {
+      color: var(--starburst-yellow);
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Exo 2', sans-serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.3rem;
+      color: var(--teal-blast);
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-bio {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: rgba(255,248,231,0.8);
+      max-width: 560px;
+      border-left: 3px solid var(--atomic-orange);
+      padding-left: 1.2rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.8rem;
+      border: 2px solid;
+      text-decoration: none;
+      transition: all 0.2s;
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--atomic-orange);
+      border-color: var(--atomic-orange);
+      color: var(--space-navy);
+    }
+    .btn-primary:hover {
+      background: var(--starburst-yellow);
+      border-color: var(--starburst-yellow);
+      transform: translate(-2px,-2px);
+      box-shadow: 4px 4px 0 var(--hot-coral);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--teal-blast);
+      color: var(--teal-blast);
+    }
+    .btn-outline:hover {
+      background: var(--teal-blast);
+      color: var(--space-navy);
+      transform: translate(-2px,-2px);
+      box-shadow: 4px 4px 0 rgba(0,197,181,0.4);
+    }
+
+    /* ===== SECTION STYLES ===== */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 2.5rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-tag {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--space-navy);
+      background: var(--starburst-yellow);
+      padding: 0.3rem 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, var(--atomic-orange), transparent);
+      margin: 0 0 3rem;
+    }
+
+    /* ===== STORIES ===== */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .story-card {
+      border: 1px solid rgba(255,92,26,0.3);
+      padding: 1.5rem;
+      position: relative;
+      transition: all 0.25s;
+      background: rgba(255,92,26,0.04);
+      overflow: hidden;
+    }
+
+    .story-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--atomic-orange);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s;
+    }
+
+    .story-card:hover { 
+      border-color: var(--atomic-orange);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255,92,26,0.2);
+    }
+    .story-card:hover::before { transform: scaleY(1); }
+
+    .story-source {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      color: var(--teal-blast);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .story-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .story-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--atomic-orange);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .story-link::after { content: '→'; }
+    .story-link:hover { color: var(--starburst-yellow); }
+
+    /* ===== BOOKS ===== */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .book-card {
+      border: 2px solid var(--teal-blast);
+      padding: 2rem;
+      position: relative;
+      background: rgba(0,197,181,0.04);
+      transition: all 0.25s;
+    }
+
+    .book-card:hover {
+      background: rgba(0,197,181,0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,197,181,0.2);
+    }
+
+    .book-badge {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .badge-published { color: var(--starburst-yellow); border-color: var(--starburst-yellow); }
+    .badge-seeking { color: var(--hot-coral); border-color: var(--hot-coral); }
+    .badge-wip { color: var(--teal-blast); border-color: var(--teal-blast); }
+
+    .book-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .book-meta {
+      font-size: 0.7rem;
+      color: var(--teal-blast);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .book-desc {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: rgba(255,248,231,0.75);
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 160px;
+      border: 2px dashed rgba(0,197,181,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      background: rgba(0,197,181,0.03);
+      color: rgba(0,197,181,0.5);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-section {
+      background: linear-gradient(135deg, rgba(255,92,26,0.05), rgba(0,197,181,0.05));
+      border-top: 2px solid var(--atomic-orange);
+      border-bottom: 2px solid var(--teal-blast);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(255,210,30,0.3);
+      background: rgba(255,210,30,0.04);
+      transition: all 0.2s;
+    }
+
+    .skill-chip:hover {
+      border-color: var(--starburst-yellow);
+      background: rgba(255,210,30,0.08);
+    }
+
+    .skill-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--starburst-yellow);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--starburst-yellow);
+    }
+
+    .skill-label {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== APP FEATURE ===== */
+    .app-card {
+      border: 2px solid var(--hot-coral);
+      padding: 2.5rem;
+      position: relative;
+      background: rgba(255,62,108,0.04);
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .app-card::before {
+      content: '★';
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: var(--starburst-yellow);
+      background: var(--space-navy);
+      padding: 0 0.5rem;
+    }
+
+    .app-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--hot-coral);
+      margin-bottom: 0.5rem;
+    }
+
+    .app-desc {
+      font-size: 0.85rem;
+      color: rgba(255,248,231,0.75);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== FLASH FICTION & DOODLES PLACEHOLDER ===== */
+    .coming-soon-box {
+      border: 2px dashed rgba(255,248,231,0.2);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .coming-soon-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: rgba(255,248,231,0.35);
+      text-transform: uppercase;
+    }
+
+    .coming-soon-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,248,231,0.5);
+      margin-top: 0.5rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 2px solid rgba(255,92,26,0.3);
+    }
+
+    .footer-atom {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--atomic-orange);
+    }
+
+    .footer-copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,248,231,0.3);
+      text-transform: uppercase;
+    }
+
+    /* ===== ORBIT DECORATION ===== */
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,92,26,0.15);
+      pointer-events: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 4rem 1.2rem; }
+      .hero { padding: 7rem 1.2rem 4rem; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeup {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeup 0.6s ease both; }
+    .hero-name { animation: fadeup 0.6s 0.1s ease both; }
+    .hero-title { animation: fadeup 0.6s 0.2s ease both; }
+    .hero-bio { animation: fadeup 0.6s 0.3s ease both; }
+    .hero-ctas { animation: fadeup 0.6s 0.4s ease both; }
+
+    /* Atom electron indicator */
+    .atom-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--teal-blast);
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(0,197,181,0.3);
+      padding: 0.4rem 1rem;
+      width: fit-content;
+    }
+
+    .atom-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal-blast);
+      box-shadow: 0 0 6px var(--teal-blast);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Sherri Cruz</div>
+    <ul class="nav-links">
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#app">App</a></li>
+      <li><a href="#flash">Flash</a></li>
+      <li><a href="#doodles">Doodles</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Starburst SVG -->
+    <svg class="starburst" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="var(--atomic-orange)">
+      <polygon points="100,0 105,93 120,8 113,95 136,19 119,98 157,38 124,103 180,62 131,110 200,91 138,117 200,120 140,122 195,152 138,127 179,163 133,131 157,182 125,133 130,192 113,134 100,200 95,134 70,192 87,133 43,182 75,131 21,163 67,127 0,152 60,122 0,120 62,117 0,91 69,110 20,62 76,103 43,38 81,98 64,19 87,95 80,8 95,93"/>
+    </svg>
+    <svg class="starburst-sm" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="var(--teal-blast)">
+      <polygon points="100,0 105,93 120,8 113,95 136,19 119,98 157,38 124,103 180,62 131,110 200,91 138,117 200,120 140,122 195,152 138,127 179,163 133,131 157,182 125,133 130,192 113,134 100,200 95,134 70,192 87,133 43,182 75,131 21,163 67,127 0,152 60,122 0,120 62,117 0,91 69,110 20,62 76,103 43,38 81,98 64,19 87,95 80,8 95,93"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Journalist · Author · Developer</div>
+      <h1 class="hero-name">Sherri<span>Cruz</span></h1>
+      <div class="hero-title">Journalism, amplified by curiosity</div>
+      <p class="hero-bio">
+        Self-taught journalist with more than two decades of experience across reporting, editing, and freelance writing. Technology reporter for the <em>Minnesota Star Tribune</em>. Editor at the <em>Orange County Register</em>, leading a team of six reporters and two weekly university sections. Career launched by successfully pitching an Internet column to the <em>Las Vegas Business Press</em>. Extensive magazine freelance contributor. Author. App developer.
+      </p>
+      <div class="hero-ctas">
+        <a href="#stories" class="btn btn-primary">Read My Stories</a>
+        <a href="#books" class="btn btn-outline">Explore Books</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section id="stories">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">bylines</div>
+        <h2 class="section-title">Selected Stories</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="stories-grid">
+
+        <div class="story-card">
+          <div class="story-source">OC Register</div>
+          <div class="story-title">Things Great and Small</div>
+          <a href="https://www.ocregister.com/2013/05/13/things-great-and-small/" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+        <div class="story-card">
+          <div class="story-source">OC Register</div>
+          <div class="story-title">Woodward's Wormholes</div>
+          <a href="https://www.ocregister.com/2013/05/21/woodwards-wormholes/" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+        <div class="story-card">
+          <div class="story-source">OC Register</div>
+          <div class="story-title">New Boss at Biggest Club on Campus</div>
+          <a href="https://www.ocregister.com/2014/08/28/new-boss-at-biggest-club-on-campus/" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+        <div class="story-card">
+          <div class="story-source">OC Register</div>
+          <div class="story-title">Harry Potter & Student Life</div>
+          <a href="http://www.ocregister.com/articles/students-602993-harry-potter.html" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+        <div class="story-card">
+          <div class="story-source">OC Register</div>
+          <div class="story-title">Preserving Native Languages</div>
+          <a href="https://www.ocregister.com/2013/11/12/preserving-native-languages/" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+        <div class="story-card">
+          <div class="story-source">More Magazine</div>
+          <div class="story-title">Skateboard Mom — More Magazine, April 2006</div>
+          <a href="http://skateboardmom.blogspot.com/2006/04/more-magazine-april-2006.html" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+        <div class="story-card">
+          <div class="story-source">Lubbock Avalanche-Journal</div>
+          <div class="story-title">Walk of Fame Star Gives Buddy Holly a Permanent Mark</div>
+          <a href="http://lubbockonline.com/local-news/2011-09-07/walk-fame-star-gives-holly-permanent-mark" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+        <div class="story-card">
+          <div class="story-source">OC Register</div>
+          <div class="story-title">Science at Play: The Khine Lab at UCI</div>
+          <a href="https://www.ocregister.com/2013/09/30/science-at-play-the-khine-lab-at-uci/" class="story-link" target="_blank" rel="noopener">Read story</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKS -->
+  <section id="books">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Author</div>
+        <h2 class="section-title">Books</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="books-grid">
+
+        <!-- Pig Popular -->
+        <div class="book-card">
+          <div class="book-badge badge-published">Published</div>
+          <div class="book-badge badge-seeking" style="margin-left:0.5rem;">Seeking Representation</div>
+          <div class="photo-placeholder">📸 Author photo coming soon</div>
+          <div class="book-title">Pig Popular</div>
+          <div class="book-meta">Chapter book · Ages 6–9</div>
+          <p class="book-desc">
+            A fun, heartfelt chapter book adventure for early readers. Currently seeking literary representation.
+          </p>
+        </div>
+
+        <!-- Middle-grade novel -->
+        <div class="book-card">
+          <div class="book-badge badge-wip">In the Works</div>
+          <div class="book-title">Untitled Middle-Grade Novel</div>
+          <div class="book-meta">Middle-grade fiction · Area 51 · Alien contact</div>
+          <p class="book-desc">
+            In the Nevada desert near Area 51, eleven-year-old Rachel discovers she can hear what no one else can: a message from space. When her government-scientist father tries to dissect the alien pod before she can help it go home, Rachel must choose between family loyalty and protecting a life that's counting on her to listen.
+          </p>
+        </div>
+
+        <!-- Pig Popular 2 -->
+        <div class="book-card">
+          <div class="book-badge badge-wip">In the Works</div>
+          <div class="book-title">Pig Popular Quits Surfing</div>
+          <div class="book-meta">Chapter book series · Book 2</div>
+          <p class="book-desc">
+            The second installment in the <em>Pig Popular</em> chapter book series — more adventures, more heart.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section id="app">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Developer</div>
+        <h2 class="section-title">The Literary Roads App</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="app-card">
+        <div class="app-name">Literary Roads</div>
+        <p class="app-desc">
+          Developed with an assist from Claude Code — a passion project at the intersection of literature and travel. Mapping the stories behind the roads.
+        </p>
+        <a href="https://theliteraryroads.com/" class="btn btn-primary" target="_blank" rel="noopener">Coming Soon — theliteraryroads.com</a>
+
+        <div style="margin-top: 2.5rem; text-align: left;">
+          <div style="font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:var(--starburst-yellow); margin-bottom:1rem; text-transform:uppercase;">Programming Skills</div>
+          <div class="skills-grid">
+            <div class="skill-chip"><div class="skill-dot"></div><div class="skill-label">6-Week Coding Bootcamp</div></div>
+            <div class="skill-chip"><div class="skill-dot"></div><div class="skill-label">COBOL — AAS in Computer Programming</div></div>
+            <div class="skill-chip"><div class="skill-dot"></div><div class="skill-label">AI-Assisted Coding</div></div>
+            <div class="skill-chip"><div class="skill-dot"></div><div class="skill-label">Prompt Engineering</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASH FICTION -->
+  <section id="flash">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Fiction</div>
+        <h2 class="section-title">Flash Fiction</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="coming-soon-box">
+        <div class="coming-soon-label">Loading transmission…</div>
+        <div class="coming-soon-title">Stories arriving soon — check back for new flash fiction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOODLES -->
+  <section id="doodles">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Art</div>
+        <h2 class="section-title">Doodles</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="coming-soon-box">
+        <div class="coming-soon-label">Gallery uploading…</div>
+        <div class="coming-soon-title">Original illustrations and doodles — coming soon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-atom">⚛</div>
+    <div class="footer-copy">&copy; <span id="yr"></span> Sherri Cruz · All rights reserved</div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
