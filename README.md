@@ -1,4 +1,4 @@
-# Sherri Cruz — Author & Journalist Landing Page
+# Author & Journalist Landing Page
 
 A personal landing page with an **atomic / retro Googie** design aesthetic.
 
